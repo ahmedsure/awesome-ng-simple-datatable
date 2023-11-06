@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col-12 col-md-2 mb-3 mb-md-0" *ngIf="totalItemsCount > 0">
+        <select class="form-select form-select-sm" (change)="pageSizeChanged($event)"
+            [(ngModel)]="pageSize">
+            <option [value]="5">5</option>
+            <option [value]="10">10</option>
+            <option [value]="20">20</option>
+            <option [value]="50">50</option>
+            <option [value]="100">100</option>
+        </select>
+    </div>
+    <ng-container *ngIf="pager.pages && pager.pages.length >= 1">
+        <div class="col-12 col-md-10 d-flex justify-content-center align-items-center">
+            <nav aria-label="List pages">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <button class="page-link nav-btn" slot="icon-only" aria-label="Previous" (click)="previous()" [disabled]="currentPage == 1">
+                            <img src="assets/images/nav-previous-icon.svg" alt="">
+                        </button>
+                    </li>
+                    <ng-container *ngFor="let page of  pager.pages">
+                        <ng-container *ngIf="page === currentPage">
+                            <li class="page-item active" fill="clear" aria-current="page">
+                                <button (click)="changePage(page)" class="page-link no-ripple">{{page}}</button>
+                            </li>
+                        </ng-container>
+                        <ng-container *ngIf="page !== currentPage">
+                            <li class="page-item">
+                                <button (click)="changePage(page)" fill="clear" class="page-link no-ripple">{{page}}</button>
+                            </li>
+                        </ng-container>
+                    </ng-container>
+
+                    <li class="page-item">
+                        <button class="page-link nav-btn" slot="icon-only" aria-label="Next" (click)="next()" [disabled]="currentPage == pager.totalPages">
+                            <img src="assets/images/nav-next-icon.svg" alt="">
+                        </button>
+                    </li>
+                </ul>
+
+            </nav>
+        </div>
+    </ng-container>
+</div>
+<!-- <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+  <li [ngClass]="{disabled:pager.currentPage === 1}">
+      <a (click)="setPage(1)">First</a>
+  </li>
+  <li [ngClass]="{disabled:pager.currentPage === 1}">
+      <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+  </li>
+  <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+      <a (click)="setPage(page)">{{page}}</a>
+  </li>
+  <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+      <a (click)="setPage(pager.currentPage + 1)">Next</a>
+  </li>
+  <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+      <a (click)="setPage(pager.totalPages)">Last</a>
+  </li>
+</ul> -->

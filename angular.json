@@ -3,5 +3,43 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "AwesomeNGDataTable": {
+      "projectType": "library",
+      "root": "projects/awesome-ngdata-table",
+      "sourceRoot": "projects/awesome-ngdata-table/src",
+      "schematics": {
+        "@schematics/angular:component": {
+          "standalone": true
+        }
+      },
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/awesome-ngdata-table/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/awesome-ngdata-table/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/awesome-ngdata-table/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/awesome-ngdata-table/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    }
   }
 }

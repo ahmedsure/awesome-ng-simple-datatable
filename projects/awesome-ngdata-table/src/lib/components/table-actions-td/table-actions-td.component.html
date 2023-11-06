@@ -1,0 +1,12 @@
+<div class="table-actions">
+  <a role="button" *ngIf="displayActionsIncludes('view')" title="{{'view'|translate}}" (click)="btnClicked('view')">
+    <img src="assets/images/table-actions/view-icon.svg" alt="">
+  </a>
+  <a role="button" *ngIf="displayActionsIncludes('edit')" title="{{'edit'|translate}}" (click)="btnClicked('edit')">
+    <img src="assets/images/table-actions/edit-icon.svg" alt="">
+  </a>
+  <a role="button" *ngIf="displayActionsIncludes('delete')" title="{{'Delete'|translate}}"
+    (click)="btnClicked('delete')">
+    <img src="assets/images/table-actions/delete-icon.svg" alt="">
+  </a>
+</div>

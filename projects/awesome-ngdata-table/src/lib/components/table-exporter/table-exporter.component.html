@@ -1,0 +1,75 @@
+<div *ngIf="isExportable && items&&items.length > 0">
+  <div ngbDropdown class="d-flex gap-3 mb-4 d-inline-block">
+    <a role="button" class="btn btn-outline-light export-toggle" id="dropdownMenu" ngbDropdownToggle>
+      <img src="assets/images/export.svg" alt="">
+      <span translate>Exporter.ExportOptions</span>
+    </a>
+    <!-- <button *ngIf="btnIsDisplayed(ExportAs.PDF)" type="button" class="btn btn-outline-light gap-2 py-2" (click)="exportPDF()">
+                  <span>PDF</span>
+                  <i-bs width="1.5rem" height="1.5rem" [name]="iconNames.FilePdfFill"></i-bs>
+              </button> -->
+    <!-- if has no more options for lazy loading -->
+    <div *ngIf="(!isLazyLoading && !fullDataURLForExportCallbackFunction ) ||(!fullDataURLForExportCallbackFunction)">
+      <ul ngbDropdownMenu aria-labelledby="dropdownMenu">
+        <li class="dropdown-submenu">
+          <a ngbDropdownItem role="button" class="btn btn-outline-light" (click)="exportEXCEL('currentPage')"
+            *ngIf="btnIsDisplayed(ExportAs.EXCEL)">
+            <!-- <i-bs width="1.5rem" height="1.5rem" [name]="iconNames.FileExcelFill"></i-bs> -->
+            <img src="assets/images/excel.svg" alt="">
+            <span>Excel</span>
+          </a>
+        </li>
+        <li>
+          <button ngbDropdownItem *ngIf="btnIsDisplayed(ExportAs.CSV)" type="button" class="btn btn-outline-light"
+            (click)="exportAsCSV('currentPage')">
+            <!-- <i-bs width="1.5rem" height="1.5rem" [name]="iconNames.FileTextFill"></i-bs> -->
+            <img src="assets/images/csv.svg" alt="">
+            <span>CSV</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+    <!-- else has  more options for lazy loading -->
+    <div *ngIf="(isLazyLoading && fullDataURLForExportCallbackFunction ) ||(fullDataURLForExportCallbackFunction)">
+      <ul ngbDropdownMenu class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+        <li ngbDropdown class="dropdown-submenu">
+          <a ngbDropdownToggle tabindex="-1" id="dropdownOptions1" role="button" class="dropdown-toggle"
+            *ngIf="btnIsDisplayed(ExportAs.EXCEL)">
+            <!-- <i-bs width="1.5rem" height="1.5rem" [name]="iconNames.FileExcelFill"></i-bs> -->
+            <img src="assets/images/excel.svg" alt="">
+            <span>Excel</span>
+          </a>
+
+          <ul ngbDropdownMenu aria-labelledby="dropdownOptions1" display="dynamic" placement="right">
+            <li>
+              <a role="button" ngbDropdownItem class="dropdown-item" (click)="exportEXCEL('all')"
+                translate>Exporter.AllPages</a>
+            </li>
+            <li>
+              <a role="button" ngbDropdownItem class="dropdown-item" (click)="exportEXCEL('currentPage')"
+                translate>Exporter.CurrentPage</a>
+            </li>
+          </ul>
+        </li>
+        <li ngbDropdown class="dropdown-submenu">
+          <a ngbDropdownToggle tabindex="-1" id="dropdownOptions1" role="button" class="dropdown-toggle"
+            *ngIf="btnIsDisplayed(ExportAs.CSV)">
+            <!-- <i-bs width="1.5rem" height="1.5rem" [name]="iconNames.FileTextFill"></i-bs> -->
+            <img src="assets/images/csv.svg" alt="">
+            <span>CSV</span>
+          </a>
+          <ul ngbDropdownMenu aria-labelledby="dropdownOptions1" display="dynamic" placement="right">
+            <li>
+              <a role="button" ngbDropdownItem class="dropdown-item" (click)="exportAsCSV('all')"
+                translate>Exporter.AllPages</a>
+            </li>
+            <li>
+              <a role="button" ngbDropdownItem class="dropdown-item" (click)="exportAsCSV('currentPage')"
+                translate>Exporter.CurrentPage</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
