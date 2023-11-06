@@ -18,7 +18,7 @@
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "project": "projects/awesome-ngdata-table/ng-package.json"
-          },
+          }, 
           "configurations": {
             "production": {
               "tsConfig": "projects/awesome-ngdata-table/tsconfig.lib.prod.json"
